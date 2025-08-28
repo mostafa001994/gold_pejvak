@@ -10,32 +10,26 @@ android {
     compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-
-    splits {
-        abi {
-            isEnable = true
-            isUniversalApk = false
-            reset()
-            include("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
-        }
-    }
-
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }
-
     defaultConfig {
         applicationId = "com.codinex.pejvak"
         minSdk = 21
         targetSdk = 34
         versionCode = 1
         versionName = "1.0.1"
+
+        // ✅ فقط معماری‌های مورد نیاز برای خروجی سبک
+        ndk {
+            abiFilters += listOf("armeabi-v7a", "arm64-v8a")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     signingConfigs {
